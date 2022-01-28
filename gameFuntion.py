@@ -6,13 +6,13 @@ def draw_all_the_sprites(sprites_group, screen):
     for i in sprites_group:
         screen.blit(i.surf, i.rect)
 
-def update_bullet(bullets, Bricksgroup):
+def update_bullet(bullets, Bricksgroup, allsprite, screen):
     for i in bullets:
-        i.update(5, Bricksgroup)
+        i.update(5, Bricksgroup,  allsprite, screen)
 
-def update_brick(bricks, Bulletgroup):
+def update_brick(bricks, allsprite, screen):
     for i in bricks:
-        i.update(1, Bulletgroup)
+        i.update(1, allsprite, screen)
 
 
 #def update_tank(tank, Bricksgroup):

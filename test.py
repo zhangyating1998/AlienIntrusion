@@ -1,10 +1,13 @@
-from ast import Pass
-from urllib.parse import ParseResultBytes
+from pickle import TRUE
 
 
-import random as rd
-for i in range(10):
-    if rd.randint(0, 10) in range(5):
-        print(1)
-    else:
-        print(2)
+A = True
+
+class gaga:
+    def gggg(self, A):
+        A = False
+
+
+g = gaga()
+g.gggg(A)
+print(A)
