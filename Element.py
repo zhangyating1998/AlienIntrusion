@@ -2,7 +2,8 @@ import pygame as pg
 from pygame import display
 from pygame.constants import RLEACCEL
 from gameFuntion import *
-# This is a class that contains all the objects in the game: the tank, the brick, the bullet.
+pg.mixer.init()
+
 
 from pygame.locals import(
     K_LEFT,
@@ -80,30 +81,45 @@ class Brick(Element):
             self.rect.top += speed
         else:
             self.kill()
+            self.sound('lose.wav')
             crash(screen)
             
     def effect(self, bricks, screen):
         self.kill()
+        self.sound('shootAlien.wav')
+    
+    def sound(self, file):
+        pg.mixer.music.load(file)
+        pg.mixer.music.play()
 
 class BombBrick(Brick):
     def __init__(self, pos, image = 'boom.png'):
         Element.__init__(self, pos, image)
 
+    def update(self, speed, screen):
+        if self.rect.top < 600:
+            self.rect.top += speed
+        else:
+            self.kill()
+            
     def effect(self,bricks, screen):
         Brick.effect(self, bricks, screen)
+        self.sound('explosion.wav')
         crash(screen)
-
-
+    
 
 class MagicBrick(Brick):
     def __init__(self, pos, image = 'coin.png'):
         Element.__init__(self, pos, image)
+
     #eliminate all the bricks that are in the same row
     def effect(self, bricks,screen):
+        self.sound('shootCoins.wav')
         for i in bricks:
             if self.rect.centery == i.rect.centery:
                 i.kill()
                 
+   
 
 
         

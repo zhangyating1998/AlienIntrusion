@@ -1,6 +1,7 @@
 import pygame as pg
 import random as rd
 
+
 def draw_all_the_sprites(sprites_group, screen):
     # draw all the sprites in the group onto the screen
     for i in sprites_group:
@@ -60,7 +61,7 @@ def setBoomBrick_chance(degree):
 
 def crash(screen):
     while True:
-        
+
         surf = pg.image.load('gameover.png')
         screen.blit(surf, (50, 150))
         pg.display.flip()
