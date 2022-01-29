@@ -56,13 +56,13 @@ class Bullet(Element):
         Element.__init__(self, pos, image)
     
 
-    def update(self, speed, bricks,allsprite, screen ):
+    def update(self, speed, bricks,screen):
         #when a bullet is fired, it will mive upside 
         if self.collision(bricks):
             for i in bricks:
                 if pg.sprite.collide_rect(self, i): # if the bullet hits on the brick
                     self.kill()
-                    i.effect(bricks,allsprite, screen )
+                    i.effect(bricks, screen)
         elif self.rect.top > 0:
             self.rect.top -= speed
         else:
@@ -75,36 +75,31 @@ class Brick(Element):
         Element.__init__(self, pos, image)
     
 
-    def update(self, speed,allsprite, screen):
+    def update(self, speed,screen):
         if self.rect.top < 600:
             self.rect.top += speed
         else:
             self.kill()
-            allsprite.empty()
-            surf = pg.image.load('gameover.png')
-            screen.blit(surf, (50, 150))
+            crash(screen)
             
-    def effect(self, bricks, allsprite, screen):
+    def effect(self, bricks, screen):
         self.kill()
 
 class BombBrick(Brick):
     def __init__(self, pos, image = 'boom.png'):
         Element.__init__(self, pos, image)
 
-    def effect(self,bricks, allsprite, screen):
-        self.kill()
-        allsprite.empty()
-        surf = pg.image.load('gameover.png')
-        screen.blit(surf, (50, 150))
+    def effect(self,bricks, screen):
+        Brick.effect(self, bricks, screen)
+        crash(screen)
 
-class pauseBrick(Brick):
-    pass
+
 
 class MagicBrick(Brick):
     def __init__(self, pos, image = 'coin.png'):
         Element.__init__(self, pos, image)
     #eliminate all the bricks that are in the same row
-    def effect(self, bricks, allsprite, screen):
+    def effect(self, bricks,screen):
         for i in bricks:
             if self.rect.centery == i.rect.centery:
                 i.kill()

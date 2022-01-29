@@ -6,13 +6,13 @@ def draw_all_the_sprites(sprites_group, screen):
     for i in sprites_group:
         screen.blit(i.surf, i.rect)
 
-def update_bullet(bullets, Bricksgroup, allsprite, screen):
+def update_bullet(bullets, Bricksgroup, screen):
     for i in bullets:
-        i.update(5, Bricksgroup,  allsprite, screen)
+        i.update(5, Bricksgroup, screen)
 
-def update_brick(bricks, allsprite, screen):
+def update_brick(bricks, screen):
     for i in bricks:
-        i.update(1, allsprite, screen)
+        i.update(1, screen)
 
 
 #def update_tank(tank, Bricksgroup):
@@ -57,3 +57,15 @@ def setMagicBrick_chance(degree):
 
 def setBoomBrick_chance(degree):
     return rd.randint(0, 15) in range(degree)
+
+def crash(screen):
+    while True:
+        
+        surf = pg.image.load('gameover.png')
+        screen.blit(surf, (50, 150))
+        pg.display.flip()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+        
+        

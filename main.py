@@ -27,13 +27,6 @@ Game_over = False
 running = True
 while running:
     screen.fill((0, 0, 0))
-    '''if Game_over:
-        surf = pg.image.load('gameover.png')
-        screen.blit(surf, (50, 150))
-        for event in pg.event.get():
-            if event.type == QUIT:# when clicking the close button of the window, the program quits.
-                running = False'''
-        
     
     for event in pg.event.get():
         if event.type == QUIT:# when clicking the close button of the window, the program quits.
@@ -73,8 +66,8 @@ while running:
     pressed_key = pg.key.get_pressed()
     tank.move(5, pressed_key)
 
-    update_bullet(bullets, bricks, AllSprite, screen) #move the bullets in bullets Group upwards or kill the bullet and brick if they are collide with each other
-    update_brick(bricks, AllSprite, screen) #move the bricks in bricks Group downwards or kill it if drops on the ground
+    update_bullet(bullets, bricks,screen) #move the bullets in bullets Group upwards or kill the bullet and brick if they are collide with each other
+    update_brick(bricks, screen) #move the bricks in bricks Group downwards or kill it if drops on the ground
     draw_all_the_sprites(AllSprite, screen)
     pg.display.flip()
         
